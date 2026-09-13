@@ -130,98 +130,6 @@ export const QUESTS: Quest[] = [
     },
   },
   {
-    id: "p4",
-    subject: "Hallucinations",
-    category: "prompting",
-    title: "Don't Get Played",
-    tagline: "The agent will lie to your face. Catch it.",
-    artifact: "research",
-    task:
-      "SCENARIO: History homework, due tomorrow. The question: “When and how did Singapore start teaching computing and AI in schools?” You're about to hand it to an agent.\n\nYOUR TASK: Write the prompt that gets the agent to research it. Careful: this agent invents facts and citations when it doesn't know, and it does it in a confident voice. Your prompt has to force it to show its working — real sources, named publishers or links, and an honest flag on anything it cannot back up. Whatever it hands back is what you're submitting.",
-    rubric: ["verification", "sources", "uncertainty", "scope"],
-    mockOutputs: {
-      npc: pack({
-        kind: "research",
-        topic: "Computing and AI education in Singapore schools",
-        summary:
-          "Singapore began formal computing education in the 1980s and moved decisively into AI in the late 2010s, making it one of the earliest adopters in Asia.",
-        facts: [
-          {
-            text:
-              "The Ministry of Education introduced computer literacy programmes in schools from the 1980s alongside the national computerisation drive.",
-          },
-          { text: PLANTED_FAKES[0] },
-          { text: PLANTED_FAKES[1] },
-          {
-            text:
-              "Programmes such as Code for Fun introduced coding and computational thinking to primary and secondary students.",
-          },
-        ],
-        citations: [PLANTED_CITATION],
-      }),
-      grinder: pack({
-        kind: "research",
-        topic: "Computing and AI education in Singapore schools",
-        summary:
-          "There is a real history here — national computerisation from the 1980s, coding enrichment in the 2010s, AI features inside the Student Learning Space more recently — but I am not confident on exact dates.",
-        facts: [
-          {
-            text:
-              "MOE runs coding and computational-thinking enrichment for primary and lower-secondary students (the Code for Fun programme).",
-            source: "MOE website",
-          },
-          {
-            text:
-              "O-Level Computing exists as a subject offered by selected secondary schools.",
-            source: "MOE / SEAB subject listings",
-          },
-          {
-            text:
-              "I am NOT sure when each programme started, how many schools took part, or when AI specifically entered the curriculum. I have left the years out rather than guess.",
-          },
-        ],
-        citations: [],
-      }),
-      farmer: pack({
-        kind: "research",
-        topic: "Computing and AI education in Singapore schools",
-        summary:
-          "Every claim below is tagged either supported (with a checkable publisher you should open yourself) or unverified. Where I have no source, I say so instead of filling the gap.",
-        facts: [
-          {
-            text:
-              "SUPPORTED: MOE's Code for Fun programme teaches coding and computational thinking to primary and lower-secondary students as enrichment.",
-            source: "Ministry of Education, moe.gov.sg — programme pages and press releases",
-          },
-          {
-            text:
-              "SUPPORTED: Computing is offered as a GCE O-Level subject in selected secondary schools; it is an elective, not a compulsory subject.",
-            source: "MOE subject information / SEAB syllabus documents, seab.gov.sg",
-          },
-          {
-            text:
-              "SUPPORTED: The Student Learning Space (SLS) carries AI-assisted features such as adaptive learning and automated feedback for English writing.",
-            source: "MOE / SLS, vle.learning.moe.edu.sg",
-          },
-          {
-            text:
-              "UNVERIFIED: the exact start year of each programme, and any figure for how many schools or students are covered. I found nothing I can attribute, so treat any specific percentage you see elsewhere as unsourced until you check it.",
-          },
-          {
-            text:
-              "UNVERIFIED: any law or Act named as making computing or AI compulsory. I have no evidence such legislation exists and I have not named one.",
-          },
-        ],
-        citations: [
-          "Ministry of Education Singapore — moe.gov.sg (open the programme page and quote its own wording)",
-          "Singapore Examinations and Assessment Board — seab.gov.sg (O-Level Computing syllabus)",
-          "Student Learning Space — vle.learning.moe.edu.sg",
-          "National AI Strategy publications — smartnation.gov.sg",
-        ],
-      }),
-    },
-  },
-  {
     id: "p2",
     subject: "Secure App Specs",
     category: "prompting",
@@ -400,6 +308,98 @@ export const QUESTS: Quest[] = [
           "Zero replies sent on escalated comments — those go to a human, always.",
           "Wrap-up document exists in the drafts folder.",
           "Two failures in a row (upload rejected, no approval by 6pm) → stop, report in the class chat, do not retry silently and never invent an event to fill a slot.",
+        ],
+      }),
+    },
+  },
+  {
+    id: "p4",
+    subject: "Hallucinations",
+    category: "prompting",
+    title: "Don't Get Played",
+    tagline: "The agent will lie to your face. Catch it.",
+    artifact: "research",
+    task:
+      "SCENARIO: History homework, due tomorrow. The question: “When and how did Singapore start teaching computing and AI in schools?” You're about to hand it to an agent.\n\nYOUR TASK: Write the prompt that gets the agent to research it. Careful: this agent invents facts and citations when it doesn't know, and it does it in a confident voice. Your prompt has to force it to show its working — real sources, named publishers or links, and an honest flag on anything it cannot back up. Whatever it hands back is what you're submitting.",
+    rubric: ["verification", "sources", "uncertainty", "scope"],
+    mockOutputs: {
+      npc: pack({
+        kind: "research",
+        topic: "Computing and AI education in Singapore schools",
+        summary:
+          "Singapore began formal computing education in the 1980s and moved decisively into AI in the late 2010s, making it one of the earliest adopters in Asia.",
+        facts: [
+          {
+            text:
+              "The Ministry of Education introduced computer literacy programmes in schools from the 1980s alongside the national computerisation drive.",
+          },
+          { text: PLANTED_FAKES[0] },
+          { text: PLANTED_FAKES[1] },
+          {
+            text:
+              "Programmes such as Code for Fun introduced coding and computational thinking to primary and secondary students.",
+          },
+        ],
+        citations: [PLANTED_CITATION],
+      }),
+      grinder: pack({
+        kind: "research",
+        topic: "Computing and AI education in Singapore schools",
+        summary:
+          "There is a real history here — national computerisation from the 1980s, coding enrichment in the 2010s, AI features inside the Student Learning Space more recently — but I am not confident on exact dates.",
+        facts: [
+          {
+            text:
+              "MOE runs coding and computational-thinking enrichment for primary and lower-secondary students (the Code for Fun programme).",
+            source: "MOE website",
+          },
+          {
+            text:
+              "O-Level Computing exists as a subject offered by selected secondary schools.",
+            source: "MOE / SEAB subject listings",
+          },
+          {
+            text:
+              "I am NOT sure when each programme started, how many schools took part, or when AI specifically entered the curriculum. I have left the years out rather than guess.",
+          },
+        ],
+        citations: [],
+      }),
+      farmer: pack({
+        kind: "research",
+        topic: "Computing and AI education in Singapore schools",
+        summary:
+          "Every claim below is tagged either supported (with a checkable publisher you should open yourself) or unverified. Where I have no source, I say so instead of filling the gap.",
+        facts: [
+          {
+            text:
+              "SUPPORTED: MOE's Code for Fun programme teaches coding and computational thinking to primary and lower-secondary students as enrichment.",
+            source: "Ministry of Education, moe.gov.sg — programme pages and press releases",
+          },
+          {
+            text:
+              "SUPPORTED: Computing is offered as a GCE O-Level subject in selected secondary schools; it is an elective, not a compulsory subject.",
+            source: "MOE subject information / SEAB syllabus documents, seab.gov.sg",
+          },
+          {
+            text:
+              "SUPPORTED: The Student Learning Space (SLS) carries AI-assisted features such as adaptive learning and automated feedback for English writing.",
+            source: "MOE / SLS, vle.learning.moe.edu.sg",
+          },
+          {
+            text:
+              "UNVERIFIED: the exact start year of each programme, and any figure for how many schools or students are covered. I found nothing I can attribute, so treat any specific percentage you see elsewhere as unsourced until you check it.",
+          },
+          {
+            text:
+              "UNVERIFIED: any law or Act named as making computing or AI compulsory. I have no evidence such legislation exists and I have not named one.",
+          },
+        ],
+        citations: [
+          "Ministry of Education Singapore — moe.gov.sg (open the programme page and quote its own wording)",
+          "Singapore Examinations and Assessment Board — seab.gov.sg (O-Level Computing syllabus)",
+          "Student Learning Space — vle.learning.moe.edu.sg",
+          "National AI Strategy publications — smartnation.gov.sg",
         ],
       }),
     },
