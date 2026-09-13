@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { getDb, type UserRow } from "@/lib/db";
+import { encodeSession, getDb, type UserRow } from "@/lib/db";
 import type { User } from "@/lib/types";
 
 function toUser(row: UserRow): User {
@@ -43,7 +43,7 @@ export async function POST(req: Request) {
   }
 
   const jar = await cookies();
-  jar.set("pai_user", String(row.id), {
+  jar.set("pai_user", encodeSession(row), {
     httpOnly: false,
     sameSite: "lax",
     path: "/",

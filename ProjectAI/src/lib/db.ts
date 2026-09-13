@@ -2,7 +2,9 @@ import fs from "node:fs";
 import path from "node:path";
 import Database from "better-sqlite3";
 
-const DATA_DIR = path.join(process.cwd(), "data");
+const DATA_DIR = process.env.PROJECTAI_DATA_DIR
+  ? path.resolve(process.env.PROJECTAI_DATA_DIR)
+  : path.join(process.cwd(), "data");
 const DB_PATH = path.join(DATA_DIR, "app.db");
 
 let instance: Database.Database | null = null;
@@ -93,6 +95,70 @@ export function getDb(): Database.Database {
   seed(db);
   instance = db;
   return db;
+}
+
+type SessionIdentity = {
+  id: number;
+  name: string;
+  classCode: string;
+  role: "student" | "teacher";
+};
+
+export function encodeSession(row: UserRow): string {
+  return JSON.stringify({
+    id: row.id,
+    name: row.name,
+    classCode: row.class_code,
+    role: row.role,
+  } satisfies SessionIdentity);
+}
+
+function decodeSession(raw: string | undefined): SessionIdentity | null {
+  if (!raw) return null;
+  try {
+    const value = JSON.parse(raw) as Partial<SessionIdentity>;
+    const name = typeof value.name === "string" ? value.name.trim().slice(0, 40) : "";
+    const classCode = typeof value.classCode === "string"
+      ? value.classCode.trim().toUpperCase().slice(0, 12)
+      : "";
+    if (!name || !classCode) return null;
+    return {
+      id: Number.isInteger(value.id) ? Number(value.id) : 0,
+      name,
+      classCode,
+      role: value.role === "teacher" ? "teacher" : "student",
+    };
+  } catch {
+    const id = Number(raw);
+    return Number.isInteger(id) && id > 0
+      ? { id, name: "", classCode: "", role: "student" }
+      : null;
+  }
+}
+
+/** Rehydrates a cookie identity in this function's SQLite instance when required. */
+export function getSessionUser(
+  db: Database.Database,
+  raw: string | undefined,
+): UserRow | undefined {
+  const identity = decodeSession(raw);
+  if (!identity) return undefined;
+
+  if (identity.id > 0) {
+    const byId = db.prepare("SELECT * FROM users WHERE id = ?").get(identity.id) as UserRow | undefined;
+    if (byId) return byId;
+  }
+  if (!identity.name || !identity.classCode) return undefined;
+
+  const existing = db
+    .prepare("SELECT * FROM users WHERE name = ? AND class_code = ?")
+    .get(identity.name, identity.classCode) as UserRow | undefined;
+  if (existing) return existing;
+
+  const info = db
+    .prepare("INSERT INTO users (name, class_code, role, aura, title) VALUES (?, ?, ?, 0, NULL)")
+    .run(identity.name, identity.classCode, identity.role);
+  return db.prepare("SELECT * FROM users WHERE id = ?").get(info.lastInsertRowid) as UserRow;
 }
 
 export interface UserRow {

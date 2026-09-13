@@ -2,7 +2,12 @@
 
 export type Tier = "npc" | "grinder" | "farmer";
 
-export type QuestCategory = "prompting" | "knowledge";
+export type QuestCategory =
+  | "foundations"
+  | "prompting"
+  | "agents"
+  | "truth"
+  | "responsibility";
 
 export interface Quest {
   id: string; // "p1" | "p2" | "p3" | "p4" | "k1" | "k2" | "k3"
@@ -63,6 +68,7 @@ export interface KnowledgeItem {
   image?: string; // for k1, path under /public
   options: string[]; // e.g. ["Real", "Fake"] or ["Okay", "Not okay"]
   answerIndex: number;
+  hint?: string; // optional thinking nudge shown before the learner commits
   explanation: string;
 }
 

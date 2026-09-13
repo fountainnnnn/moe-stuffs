@@ -23,7 +23,7 @@ export default function ArtifactBubble({
   offline?: boolean;
 }) {
   return (
-    <div className="bubble overflow-hidden">
+    <div className="artifact-bubble bubble overflow-hidden">
       {/* run strip — the agent reporting what it just made */}
       <div
         className="flex items-center gap-2 border-b-[2.5px] border-[var(--ink)] px-3 py-1.5"

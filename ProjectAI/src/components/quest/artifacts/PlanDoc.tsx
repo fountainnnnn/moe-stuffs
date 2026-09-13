@@ -2,7 +2,7 @@ import type { PlanArtifact } from "@/lib/types";
 
 export default function PlanDoc({ artifact }: { artifact: PlanArtifact }) {
   return (
-    <div className="max-h-[46vh] overflow-y-auto p-3">
+    <div className="artifact-plan max-h-[52vh] overflow-y-auto p-3">
       <p className="text-[10px] font-extrabold uppercase tracking-[0.22em] opacity-55">
         plan.md · {artifact.steps.length} steps
       </p>
@@ -15,9 +15,9 @@ export default function PlanDoc({ artifact }: { artifact: PlanArtifact }) {
         </div>
       )}
 
-      <ol className="mt-3 space-y-2">
+      <ol className="mt-3 grid gap-2 lg:grid-cols-2">
         {artifact.steps.map((s, k) => (
-          <li key={k} className="flex gap-2">
+          <li key={k} className="flex gap-2 rounded-lg bg-[var(--paper)] px-2 py-1.5">
             <span className="mt-px flex h-5 w-5 shrink-0 items-center justify-center rounded-full border-2 border-[var(--ink)] bg-[var(--card)] font-mono text-[10px] font-black">
               {s.n}
             </span>
@@ -38,7 +38,7 @@ export default function PlanDoc({ artifact }: { artifact: PlanArtifact }) {
           <p className="text-[9.5px] font-extrabold uppercase tracking-[0.2em] opacity-55">
             done criteria
           </p>
-          <ul className="mt-1 space-y-1">
+          <ul className="mt-1 grid gap-x-4 gap-y-1 lg:grid-cols-2">
             {artifact.doneCriteria.map((d, k) => (
               <li key={k} className="flex gap-1.5 text-[12px] font-semibold leading-snug">
                 <span className="shrink-0">☑</span>

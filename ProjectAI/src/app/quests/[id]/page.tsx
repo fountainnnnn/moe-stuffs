@@ -31,10 +31,10 @@ export default async function QuestPlayerPage({
 
   return (
     <main>
-      {quest.category === "prompting" ? (
-        <PromptingQuest quest={quest} />
-      ) : (
+      {quest.items?.length ? (
         <KnowledgeQuest quest={quest} />
+      ) : (
+        <PromptingQuest quest={quest} />
       )}
     </main>
   );

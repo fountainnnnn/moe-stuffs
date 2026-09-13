@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { getDb, type UserRow } from "@/lib/db";
+import { getDb, getSessionUser } from "@/lib/db";
 import { executeArtifact, fallbackArtifact } from "@/lib/execute";
 import { demandsVerification, judgePrompt } from "@/lib/judge";
 import { getQuest } from "@/lib/quests";
@@ -16,7 +16,7 @@ export async function POST(req: Request) {
   const questId = (body.questId ?? "").trim();
   const prompt = (body.prompt ?? "").toString();
   const quest = getQuest(questId);
-  if (!quest || quest.category !== "prompting") {
+  if (!quest?.rubric?.length || !quest.artifact) {
     return NextResponse.json({ error: "unknown prompting quest" }, { status: 400 });
   }
   if (!prompt.trim()) {
@@ -38,16 +38,13 @@ export async function POST(req: Request) {
   const trapSprung = quest.id === "p4" && !demandsVerification(prompt);
 
   const jar = await cookies();
-  const userId = Number(jar.get("pai_user")?.value);
-  if (Number.isInteger(userId) && userId > 0) {
-    const db = getDb();
-    const user = db.prepare("SELECT id FROM users WHERE id = ?").get(userId) as UserRow | undefined;
-    if (user) {
+  const db = getDb();
+  const user = getSessionUser(db, jar.get("pai_user")?.value);
+  if (user) {
       db.prepare(
         `INSERT INTO attempts (user_id, quest_id, prompt, score, tier, feedback, missing, submitted)
          VALUES (?, ?, ?, ?, ?, ?, ?, 0)`,
-      ).run(userId, questId, prompt, verdict.score, verdict.tier, verdict.advice, JSON.stringify(verdict.missing));
-    }
+      ).run(user.id, questId, prompt, verdict.score, verdict.tier, verdict.advice, JSON.stringify(verdict.missing));
   }
 
   return NextResponse.json({ verdict, artifact, artifactFallback, trapSprung });

@@ -1,4 +1,5 @@
 import type { Artifact, Quest } from "./types";
+import { EXTENDED_QUESTS } from "./curriculum";
 
 /** Offline fallback artifacts are stored as JSON strings in `quest.mockOutputs`. */
 const pack = (a: Artifact): string => JSON.stringify(a);
@@ -410,7 +411,7 @@ export const QUESTS: Quest[] = [
   {
     id: "k1",
     subject: "Your eyes can be fooled \u2014 learn the tells",
-    category: "knowledge",
+    category: "truth",
     title: "Real or Fake?",
     tagline: "Six scenes. Some look cooked. Find the clues.",
     task: "Look for visual clues. Would you flag each image as likely AI-generated?",
@@ -474,7 +475,7 @@ export const QUESTS: Quest[] = [
   {
     id: "k2",
     subject: "Using AI isn't cheating; hiding it is",
-    category: "knowledge",
+    category: "responsibility",
     title: "Okay or Not Okay?",
     tagline: "Six scenarios. Some are fine. Some will get you called up.",
     task: "For each scenario, decide whether this use of AI is okay or not okay.",
@@ -538,7 +539,7 @@ export const QUESTS: Quest[] = [
   {
     id: "k3",
     subject: "Confident doesn't mean correct",
-    category: "knowledge",
+    category: "truth",
     title: "Cap Detector",
     tagline: "One sentence in each answer is straight-up made up. Find it.",
     task: "Each AI answer below contains exactly one fabricated sentence. Pick it.",
@@ -581,6 +582,7 @@ export const QUESTS: Quest[] = [
       },
     ],
   },
+  ...EXTENDED_QUESTS,
 ];
 
 export function getQuest(id: string): Quest | undefined {

@@ -1,7 +1,7 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
 import { auraDelta, TIER_ORDER } from "@/lib/aura";
-import { getDb, type AttemptRow, type UserRow } from "@/lib/db";
+import { getDb, getSessionUser, type AttemptRow } from "@/lib/db";
 import { judgePrompt } from "@/lib/judge";
 import { getQuest } from "@/lib/quests";
 import type { Tier } from "@/lib/types";
@@ -17,7 +17,7 @@ export async function POST(req: Request) {
   const questId = (body.questId ?? "").trim();
   const prompt = (body.prompt ?? "").toString();
   const quest = getQuest(questId);
-  if (!quest || quest.category !== "prompting") {
+  if (!quest?.rubric?.length || !quest.artifact) {
     return NextResponse.json({ error: "unknown prompting quest" }, { status: 400 });
   }
   if (!prompt.trim()) {
@@ -25,14 +25,10 @@ export async function POST(req: Request) {
   }
 
   const jar = await cookies();
-  const userId = Number(jar.get("pai_user")?.value);
-  if (!Number.isInteger(userId) || userId <= 0) {
-    return NextResponse.json({ error: "not joined" }, { status: 401 });
-  }
-
   const db = getDb();
-  const user = db.prepare("SELECT * FROM users WHERE id = ?").get(userId) as UserRow | undefined;
+  const user = getSessionUser(db, jar.get("pai_user")?.value);
   if (!user) return NextResponse.json({ error: "not joined" }, { status: 401 });
+  const userId = user.id;
 
   const verdict = await judgePrompt(quest, prompt);
 

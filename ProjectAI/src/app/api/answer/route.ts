@@ -1,6 +1,6 @@
 import { cookies } from "next/headers";
 import { NextResponse } from "next/server";
-import { getDb, type AttemptRow, type UserRow } from "@/lib/db";
+import { getDb, getSessionUser, type AttemptRow } from "@/lib/db";
 import { getQuest } from "@/lib/quests";
 import type { Tier } from "@/lib/types";
 
@@ -23,7 +23,7 @@ export async function POST(req: Request) {
 
   const questId = (body.questId ?? "").trim();
   const quest = getQuest(questId);
-  if (!quest || quest.category !== "knowledge" || !quest.items?.length) {
+  if (!quest?.items?.length) {
     return NextResponse.json({ error: "unknown knowledge quest" }, { status: 400 });
   }
   if (!Array.isArray(body.answers)) {
@@ -40,14 +40,10 @@ export async function POST(req: Request) {
   const total = items.length;
 
   const jar = await cookies();
-  const userId = Number(jar.get("pai_user")?.value);
-  if (!Number.isInteger(userId) || userId <= 0) {
-    return NextResponse.json({ error: "not joined" }, { status: 401 });
-  }
-
   const db = getDb();
-  const user = db.prepare("SELECT * FROM users WHERE id = ?").get(userId) as UserRow | undefined;
+  const user = getSessionUser(db, jar.get("pai_user")?.value);
   if (!user) return NextResponse.json({ error: "not joined" }, { status: 401 });
+  const userId = user.id;
 
   // Only pay out the improvement over their previous best run of this quest.
   const prior = db

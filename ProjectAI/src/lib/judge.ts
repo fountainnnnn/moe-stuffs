@@ -27,6 +27,14 @@ const RUBRIC_GUIDE: Record<string, string> = {
   steps: "Steps — numbered, individually doable steps in order",
   tools: "Tools — which tools the agent may use, and which it may not",
   done: "Done criteria — how the agent knows it is finished, and what to do on failure",
+  examples: "Examples — two or more examples that demonstrate the desired pattern without completing the final task",
+  clarifying: "Clarifying questions — the prompt identifies missing information, asks focused questions and waits for answers",
+  criteria: "Success criteria — concrete, checkable standards the output must meet",
+  decomposition: "Decomposition — a complex task is split into smaller jobs with dependencies or outputs",
+  boundaries: "Boundaries — explicit forbidden actions, assumptions or conditions that make the agent stop",
+  permissions: "Permissions — least-privilege read, write, send or edit access is stated per tool",
+  checkpoints: "Human checkpoints — consequential actions pause for informed approval before they happen",
+  recovery: "Failure recovery — validation, safe retry limits, escalation and stopping rules",
 };
 
 function systemPrompt(quest: Quest): string {
@@ -90,6 +98,13 @@ const STEP_WORDS = ["step", "steps", "first", "then", "1.", "2.", "numbered", "o
 const TOOL_WORDS = ["tool", "tools", "allowed", "not allowed", "may use", "search", "file", "api", "permission"];
 const DONE_WORDS = ["done", "finish", "complete", "stop", "success", "criteria", "when it", "acceptance"];
 const GOAL_WORDS = ["goal", "objective", "success", "aim", "outcome"];
+const EXAMPLE_WORDS = ["example", "examples", "for instance", "input:", "output:"];
+const QUESTION_WORDS = ["ask me", "questions", "clarify", "before you begin", "wait for", "do not assume", "don't assume"];
+const CRITERIA_WORDS = ["criteria", "rubric", "must include", "self-check", "quality check", "requirements"];
+const BOUNDARY_WORDS = ["must not", "do not", "don't", "never", "forbidden", "out of scope", "stop if"];
+const PERMISSION_WORDS = ["read-only", "read only", "may read", "may write", "may send", "permission", "least access", "must not access"];
+const CHECKPOINT_WORDS = ["approval", "approve", "checkpoint", "review before", "wait before", "human review", "confirm before"];
+const RECOVERY_WORDS = ["retry", "failure", "fails", "error", "escalate", "rollback", "recover", "audit log"];
 
 function has(text: string, words: string[]): boolean {
   return words.some((w) => text.includes(w));
@@ -143,6 +158,22 @@ export function fallbackScore(quest: Quest, studentPrompt: string): JudgeVerdict
         return has(p, TOOL_WORDS);
       case "done":
         return has(p, DONE_WORDS);
+      case "examples":
+        return has(p, EXAMPLE_WORDS) && (p.match(/example/g)?.length ?? 0) >= 2;
+      case "clarifying":
+        return has(p, QUESTION_WORDS);
+      case "criteria":
+        return has(p, CRITERIA_WORDS);
+      case "decomposition":
+        return has(p, STEP_WORDS) && has(p, ["phase", "dependency", "depends", "owner", "output", "workstream"]);
+      case "boundaries":
+        return has(p, BOUNDARY_WORDS);
+      case "permissions":
+        return has(p, PERMISSION_WORDS);
+      case "checkpoints":
+        return has(p, CHECKPOINT_WORDS);
+      case "recovery":
+        return has(p, RECOVERY_WORDS) && has(p, ["stop", "limit", "maximum", "max", "escalate"]);
       default:
         return false;
     }
@@ -184,6 +215,14 @@ const FALLBACK_ADVICE: Record<string, string> = {
   steps: "Break it into numbered steps, each one actually doable.",
   tools: "List the tools it may use, and the ones it must not touch.",
   done: "No done-criteria means it never stops. Say how it knows it's finished.",
+  examples: "Show the pattern with two short examples. Do not make the agent guess your style.",
+  clarifying: "Tell it what to ask before planning, then make it wait for your answers.",
+  criteria: "Define what good means with checkable criteria before asking for the draft.",
+  decomposition: "Split the mega-task into phases, dependencies and visible outputs.",
+  boundaries: "Name what the agent must never assume, and when it must stop.",
+  permissions: "Give each tool the minimum access it needs. Separate reading from changing or sending.",
+  checkpoints: "Add human approval before the agent sends, spends, publishes or deletes.",
+  recovery: "Plan for failure: validate, limit retries, log the result and escalate.",
 };
 
 export async function judgePrompt(quest: Quest, studentPrompt: string): Promise<JudgeVerdict> {

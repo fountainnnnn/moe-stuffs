@@ -1,0 +1,7 @@
+.next
+.agents
+data
+docs/screenshots
+node_modules
+*.tsbuildinfo
+scripts/qa-*.mjs
