@@ -1,0 +1,12 @@
+{
+  "version": "0.0.1",
+  "configurations": [
+    {
+      "name": "projectai",
+      "runtimeExecutable": "npm",
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/fountain/moe-stuffs/ProjectAI"],
+      "port": 3000,
+      "autoPort": true
+    }
+  ]
+}
