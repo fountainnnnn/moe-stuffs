@@ -1,28 +1,61 @@
 import Link from "next/link";
 import { QUESTS } from "@/lib/quests";
-import type { Quest } from "@/lib/types";
+import type { Quest, QuestCategory } from "@/lib/types";
 import UiIcon from "@/components/UiIcon";
 
-const TRACKS = [
+const TRACKS: {
+  category: QuestCategory;
+  name: string;
+  shortName: string;
+  blurb: string;
+  color: string;
+  icon: "prompting" | "knowledge";
+}[] = [
   {
-    category: "prompting" as const,
-    name: "Prompting Arena",
-    blurb: "Write the prompt. A real model grades it. No vibes, only receipts.",
-    color: "var(--accent)",
-    icon: "prompting" as const,
+    category: "foundations",
+    name: "AI Foundations",
+    shortName: "Foundations",
+    blurb: "Know what AI, machine learning, generative AI and agents actually do.",
+    color: "var(--gold)",
+    icon: "knowledge",
   },
   {
-    category: "knowledge" as const,
-    name: "Knowledge Grind",
-    blurb: "Spot the fake, call out the cap, decide what's actually okay.",
+    category: "prompting",
+    name: "Prompting Arena",
+    shortName: "Prompting",
+    blurb: "Give useful instructions, test the result and improve one decision at a time.",
+    color: "var(--accent)",
+    icon: "prompting",
+  },
+  {
+    category: "agents",
+    name: "Agent Academy",
+    shortName: "Agents",
+    blurb: "Plan tools, permissions, checkpoints, memory and safe recovery.",
+    color: "var(--mint)",
+    icon: "prompting",
+  },
+  {
+    category: "truth",
+    name: "Truth Lab",
+    shortName: "Truth",
+    blurb: "Check sources, data and synthetic media without trusting surface confidence.",
     color: "var(--sky)",
-    icon: "knowledge" as const,
+    icon: "knowledge",
+  },
+  {
+    category: "responsibility",
+    name: "Responsible AI",
+    shortName: "Responsibility",
+    blurb: "Protect privacy, fairness, ownership, human judgment and your own voice.",
+    color: "var(--coral)",
+    icon: "knowledge",
   },
 ];
 
 export default function QuestMapPage() {
   return (
-    <main className="mx-auto max-w-5xl px-4 pb-24 pt-8">
+    <main className="mx-auto max-w-5xl px-5 pb-24 pt-8 sm:px-8">
       <header className="flex flex-wrap items-end justify-between gap-4">
         <div>
           <p className="text-[11px] font-extrabold uppercase tracking-[0.24em] opacity-55">
@@ -32,7 +65,7 @@ export default function QuestMapPage() {
             Pick your grind.
           </h1>
           <p className="mt-2 max-w-md text-sm font-semibold opacity-70">
-            Two tracks. Every clear = aura. Top 3 in class hold the Aura Farmer crown.
+            Five tracks, 28 quests. Learn the idea, try it yourself, then use a hint only when you need one.
           </p>
         </div>
         <Link
@@ -43,11 +76,20 @@ export default function QuestMapPage() {
         </Link>
       </header>
 
-      {TRACKS.map((track) => {
+      <nav className="quest-track-nav mt-6" aria-label="Jump to a learning track">
+        {TRACKS.map((track, index) => (
+          <a key={track.category} href={`#${track.category}`}>
+            <span style={{ background: track.color }}>{index + 1}</span>
+            {track.shortName}
+          </a>
+        ))}
+      </nav>
+
+      {TRACKS.map((track, trackIndex) => {
         const quests = QUESTS.filter((q) => q.category === track.category);
         if (!quests.length) return null;
         return (
-          <section key={track.category} className="mt-12">
+          <section key={track.category} id={track.category} className="quest-track mt-12 scroll-mt-5">
             <div className="flex flex-wrap items-center gap-3">
               <span
                 className="stamp text-lg"
@@ -56,6 +98,9 @@ export default function QuestMapPage() {
                 <UiIcon name={track.icon} size={28} className="mr-1.5" /> {track.name}
               </span>
               <p className="text-sm font-semibold opacity-65">{track.blurb}</p>
+              <span className="ml-auto text-xs font-extrabold uppercase tracking-wider opacity-45">
+                Track {trackIndex + 1} · {quests.length} quests
+              </span>
             </div>
             <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
               {quests.map((q, i) => (
@@ -81,8 +126,8 @@ function QuestCard({
   accent: string;
 }) {
   const meta =
-    quest.category === "prompting"
-      ? `${quest.rubric?.length ?? 0} rubric checks`
+    quest.rubric?.length
+      ? `${quest.rubric?.length ?? 0} coaching checks`
       : `${quest.items?.length ?? 0} items`;
 
   if (quest.locked) {
@@ -120,7 +165,7 @@ function QuestCard({
           className="shrink-0 whitespace-nowrap rounded-full border-2 border-[var(--ink)] px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider"
           style={{ background: accent }}
         >
-          {quest.category === "prompting" ? "LLM judged" : "quiz"}
+          {quest.rubric?.length ? "coached build" : "guided quiz"}
         </span>
       </div>
       <h3 className="mt-1 text-lg font-black leading-tight">{quest.title}</h3>
