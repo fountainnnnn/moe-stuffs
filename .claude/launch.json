@@ -4,9 +4,9 @@
     {
       "name": "projectai",
       "runtimeExecutable": "npm",
-      "runtimeArgs": ["run", "dev", "--prefix", "/Users/fountain/moe-stuffs/ProjectAI"],
-      "port": 3000,
-      "autoPort": true
+      "runtimeArgs": ["run", "dev", "--prefix", "/Users/fountain/moe-stuffs/ProjectAI", "--", "--port", "4000"],
+      "port": 4000,
+      "autoPort": false
     }
   ]
 }

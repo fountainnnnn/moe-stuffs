@@ -39,8 +39,8 @@ Top 3 in the class hold the **Aura Farmer** title. First-try success earns a bon
 | Subject | Quest | You produce |
 |---|---|---|
 | Prompting: CRAFT | The 90-Second Pitch | A 5-slide CCA assembly pitch deck |
-| Vibe Coding | Ship the Party Site | A class-party sign-up website |
-| AI Agents | IG Autopilot | A one-week agent plan for the class Instagram |
+| Secure App Specs | Ship the Party Site | A class-party sign-up website |
+| Planning AI Agents | IG Autopilot | A one-week agent plan for the class Instagram |
 | Hallucinations | Don't Get Played | A research brief — and a trap |
 
 **Don't Get Played** is the one we're proudest of: unless the student's prompt demands verification and sources, the agent plants two false facts and a fabricated citation in an otherwise-plausible research brief. Submit without catching them and the screen takes over: **🚨 FLAGGED — you just shipped a hallucination**, with the fakes revealed. That lesson sticks.

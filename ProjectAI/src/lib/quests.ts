@@ -223,7 +223,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "p2",
-    subject: "Vibe Coding",
+    subject: "Secure App Specs",
     category: "prompting",
     title: "Ship the Party Site",
     tagline: "\"Build me a website\" gets you a broken website. Spec it.",
@@ -309,7 +309,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "p3",
-    subject: "AI Agents",
+    subject: "Planning AI Agents",
     category: "prompting",
     title: "IG Autopilot",
     tagline: "One week. Zero hands. Write the plan the agent follows.",
@@ -412,7 +412,7 @@ export const QUESTS: Quest[] = [
     subject: "Deepfakes",
     category: "knowledge",
     title: "Real or Fake?",
-    tagline: "Six faces. Some are cooked. Which ones?",
+    tagline: "Six scenes. Some look cooked. Find the clues.",
     task: "Look for visual clues. Would you flag each image as likely AI-generated?",
     items: [
       {
@@ -422,7 +422,7 @@ export const QUESTS: Quest[] = [
         options: ["No obvious clues", "Flag as AI"],
         answerIndex: 1,
         explanation:
-          "Fake. Look at where the hair meets the background — generated images smear individual strands into the blur instead of keeping crisp separate hairs, and backlit hair is the hardest case of all. Second tell: the earrings don't match each other. Generators treat left and right as two separate paint jobs, so paired objects — earrings, collar points, shoe laces — drift out of sync.",
+          "Flag it. Look at where the hair meets the background — generated images can smear individual strands into the blur instead of keeping crisp separate hairs, and backlit hair is one of the hardest cases. Second tell: the earrings don't match each other. Generators may treat left and right as two separate paint jobs, so paired objects — earrings, collar points, shoe laces — drift out of sync.",
       },
       {
         id: "k1-2",
@@ -431,7 +431,7 @@ export const QUESTS: Quest[] = [
         options: ["No obvious clues", "Flag as AI"],
         answerIndex: 0,
         explanation:
-          "Real. The giveaways here are the imperfections: one face is motion-blurred because the shutter caught them turning, the shadows all fall the same direction with the same softness, and the court lines stay straight and continuous where they pass behind people. Generated crowd shots usually fail exactly there — lines bend around bodies and every face is equally sharp.",
+          "No obvious flag. The camera-like cues here are the imperfections: one face is motion-blurred as if the shutter caught them turning, the shadows all fall the same direction with the same softness, and the court lines stay straight and continuous where they pass behind people. Generated crowd shots often fail exactly there — lines bend around bodies and every face is equally sharp.",
       },
       {
         id: "k1-3",
@@ -440,7 +440,7 @@ export const QUESTS: Quest[] = [
         options: ["No obvious clues", "Flag as AI"],
         answerIndex: 1,
         explanation:
-          "Fake. Count the fingers, then check the knuckles — hands are still the classic failure because a hand's shape changes drastically with angle and models average over the mess. Also check the phone screen: generated screens show text-shaped texture that isn't actual readable text, and the reflection in the screen doesn't match the room around it.",
+          "Flag it. Count the fingers, then check the knuckles — hands are a classic failure because a hand's shape changes drastically with angle and models can average over the mess. Also check the phone screen: generated screens may show text-shaped texture that isn't actual readable text, and the reflection in the screen may not match the room around it.",
       },
       {
         id: "k1-4",
@@ -449,7 +449,7 @@ export const QUESTS: Quest[] = [
         options: ["No obvious clues", "Flag as AI"],
         answerIndex: 1,
         explanation:
-          "Fake. Read the signs. Lettering is where generated images fall apart fastest: letters look right at a glance but spell nothing, the same sign uses two different fonts, or a word repeats with different spelling. Then check the geometry — window frames and roof edges that should line up on one vanishing point wander off in different directions.",
+          "Flag it. Read the signs. Lettering is where generated images can fall apart fastest: letters look right at a glance but spell nothing, the same sign uses two different fonts, or a word repeats with different spelling. Then check the geometry — window frames and roof edges that should line up on one vanishing point wander off in different directions.",
       },
       {
         id: "k1-5",
@@ -458,7 +458,7 @@ export const QUESTS: Quest[] = [
         options: ["No obvious clues", "Flag as AI"],
         answerIndex: 0,
         explanation:
-          "Real — and the point of this one is that you can't decide from pixels alone. Before you trust an image of a public figure, check provenance: who published it, do two independent outlets have the same moment from different angles, is there video. A photo that only exists on one account with no wire-service or newsroom original behind it is the suspicious one, whatever the pixels look like.",
+          "No obvious flag — and the point is that you can't decide provenance from pixels alone. Before you trust an image of a public figure, check who published it, whether two independent outlets have the same moment from different angles, and whether there is video. A picture that only exists on one account with no wire-service or newsroom original behind it is suspicious, whatever the pixels look like.",
       },
       {
         id: "k1-6",
@@ -467,7 +467,7 @@ export const QUESTS: Quest[] = [
         options: ["No obvious clues", "Flag as AI"],
         answerIndex: 1,
         explanation:
-          "Fake. Fur is the tell: generated fur is uniformly detailed everywhere, while a real lens has one plane in focus and falls off smoothly in front and behind it. Then check the whiskers, where they cross the background, and the light — if the cat is lit from the left while the shadow on the sill points left too, the physics is wrong and no camera made that.",
+          "Flag it. Fur can be a tell: generated fur may be uniformly detailed everywhere, while a camera lens usually has one plane in focus and falls off smoothly in front and behind it. Then check the whiskers where they cross the background, and the light — if the cat is lit from the left while the shadow on the sill also points left, the physics is inconsistent.",
       },
     ],
   },

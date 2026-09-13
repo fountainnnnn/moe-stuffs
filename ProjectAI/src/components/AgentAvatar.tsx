@@ -1,6 +1,7 @@
 "use client";
 
 import { useEffect, useState } from "react";
+import Image from "next/image";
 
 export type AgentMood = "idle" | "thinking" | "disappointed" | "hyped";
 
@@ -22,7 +23,8 @@ export default function AgentAvatar({
 
   useEffect(() => {
     let alive = true;
-    const probe = new Image();
+    // window.Image, not the next/image import that shadows the global here
+    const probe = new window.Image();
     probe.onload = () => alive && setImgOk(true);
     probe.onerror = () => alive && setImgOk(false);
     probe.src = `/avatar/${mood}.png`;
@@ -40,6 +42,7 @@ export default function AgentAvatar({
       <style>{`
         .aa-wrap { display:inline-block; line-height:0; }
         .aa-wrap img, .aa-wrap svg { width:100%; height:100%; display:block; }
+        .aa-wrap img { transform:scale(1.12); transform-origin:center; }
         @keyframes aa-bob { 0%,100%{transform:translateY(0) rotate(-1deg)} 50%{transform:translateY(-5px) rotate(1deg)} }
         @keyframes aa-think { 0%,100%{transform:translateY(0) rotate(-3deg)} 50%{transform:translateY(-2px) rotate(3deg)} }
         @keyframes aa-hype { 0%,100%{transform:translateY(0) scale(1)} 25%{transform:translateY(-10px) scale(1.06) rotate(-4deg)} 60%{transform:translateY(-3px) scale(1.02) rotate(4deg)} }
@@ -48,9 +51,11 @@ export default function AgentAvatar({
         .aa-hype { animation: aa-hype 0.8s ease-in-out infinite; }
       `}</style>
       {imgOk ? (
-        <img
+        <Image
           src={`/avatar/${mood}.png`}
           alt=""
+          width={px}
+          height={px}
           onError={() => setImgOk(false)}
         />
       ) : (
