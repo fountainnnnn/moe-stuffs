@@ -73,9 +73,20 @@ npm run dev
 
 Join with any name. Class code `3E4` comes pre-seeded with a class so the leaderboard and teacher dashboard aren't empty.
 
+## Deploy to Vercel
+
+When importing the GitHub repository, set **Root Directory** to `ProjectAI`. The checked-in
+`vercel.json` pins pnpm and routes SQLite writes to Vercel's writable `/tmp` directory. Add
+`OPENROUTER_API_KEY` in the Vercel project's environment variables if you want live model
+judging; the offline scorer and fallback artifacts work without it.
+
+The `/tmp` database is suitable for a preview, not durable classroom records. It can reset
+when a serverless instance is replaced, and different instances do not share state. Connect a
+hosted database before treating leaderboard or teacher-dashboard data as permanent.
+
 ## Honest limitations
 
-Built in ~2 hours for a live demo, so: **there is no real auth** — identity is a client-readable cookie, and anyone can act as anyone. Grading calls cost real (tiny) money per run. The deepfake quiz ships without images until you add six to `public/deepfakes/`. None of this is production software; all of it is a working argument that AI literacy should be taught by doing.
+Built in ~2 hours for a live demo, so: **there is no real auth**. Identity is a client-readable cookie and the landing page lets anyone pick "Teacher", so any viewer can open the teacher dashboard and read the whole class's progress. Role is never verified server-side; a request can also auto-create an account. Fine for one laptop in one classroom, disqualifying for anything shared — before this goes near real student data it needs a signed session and a server-side role. Grading calls cost real (tiny) money per run. The deepfake quiz ships without images until you add six to `public/deepfakes/`. None of this is production software; all of it is a working argument that AI literacy should be taught by doing.
 
 ## Credits
 
