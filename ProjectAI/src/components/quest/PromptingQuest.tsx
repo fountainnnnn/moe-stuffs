@@ -202,8 +202,8 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
       artifact,
       offline: artifactFallback,
     });
-    await sleep(420);
-    push({ id: nextId(), role: "agent", kind: "coach", verdict: v });
+    // No coaching on a run — the weak artifact is the feedback. The agent only
+    // spells out what's missing when they try to submit it.
   }
 
   async function onSubmit() {
@@ -224,6 +224,10 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
       setLocked(true);
       setLastTier(data.verdict.tier);
       atBottomRef.current = true;
+      // Only now does the agent spell out what the prompt was missing.
+      if (data.verdict.tier !== "farmer") {
+        push({ id: nextId(), role: "agent", kind: "coach", verdict: data.verdict });
+      }
       push({
         id: nextId(),
         role: "agent",
