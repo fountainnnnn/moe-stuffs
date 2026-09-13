@@ -258,7 +258,7 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
         : "idle";
 
   return (
-    <div className="mx-auto flex w-full max-w-3xl flex-col gap-2 px-3 pb-4 pt-3 sm:px-4">
+    <div className="mx-auto flex w-full max-w-6xl flex-col gap-1.5 px-3 pb-3 pt-2 sm:px-6">
       <style>{`
         @keyframes pq-dots { 0%{opacity:.2} 50%{opacity:1} 100%{opacity:.2} }
         .pq-dot { animation: pq-dots 1s infinite; }
@@ -271,17 +271,17 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
 
       <Link
         href="/quests"
-        className="w-fit text-sm font-extrabold underline decoration-2 underline-offset-4"
+        className="w-fit text-xs font-extrabold underline decoration-2 underline-offset-4"
       >
         ← quest map
       </Link>
 
       <section className="card-sticker chat-shell flex flex-col overflow-hidden">
         {/* slim header */}
-        <header className="flex flex-wrap items-center gap-x-3 gap-y-1.5 border-b-[2.5px] border-[var(--ink)] px-3 py-2 sm:px-4">
-          <AgentAvatar mood={mood} size="sm" className="shrink-0 !w-9 !h-9" />
+        <header className="flex flex-wrap items-center gap-x-2.5 gap-y-1 border-b-[2.5px] border-[var(--ink)] px-3 py-1.5 sm:px-4">
+          <AgentAvatar mood={mood} size="sm" className="shrink-0 !w-7 !h-7" />
           <div className="min-w-0">
-            <h1 className="truncate text-base font-black leading-tight sm:text-lg">
+            <h1 className="truncate text-sm font-black leading-tight sm:text-base">
               <span className="opacity-50">{quest.subject ?? quest.id.toUpperCase()} ·</span> {quest.title}
             </h1>
             {!!quest.rubric?.length && (
@@ -289,7 +289,7 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
                 {quest.rubric.map((r) => (
                   <span
                     key={r}
-                    className="rounded-full border-2 border-[var(--ink)] bg-[var(--sky)] px-1.5 py-px text-[10px] font-extrabold leading-tight"
+                    className="rounded-full border-2 border-[var(--ink)] bg-[var(--sky)] px-1.5 py-px text-[9px] font-extrabold leading-tight"
                   >
                     {label(r)}
                   </span>
@@ -304,7 +304,7 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
             <button
               onClick={onSubmit}
               disabled={runs === 0 || busy || locked}
-              className="card-sticker card-sticker-press px-3 py-1.5 text-xs font-extrabold disabled:opacity-40 sm:text-sm"
+              className="card-sticker card-sticker-press px-2.5 py-1 text-[11px] font-extrabold disabled:opacity-40 sm:text-xs"
               style={{ boxShadow: "2px 2px 0 0 var(--ink)" }}
             >
               {locked ? "✅ locked in" : submitting ? "locking in…" : "✅ SUBMIT FINAL"}
@@ -316,13 +316,13 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
         <div
           ref={scrollRef}
           onScroll={onScroll}
-          className="chat-scroll flex-1 space-y-3 overflow-y-auto px-3 py-4 sm:px-4"
+          className="chat-scroll flex-1 space-y-2.5 overflow-y-auto px-3 py-3 sm:px-5"
         >
           {messages.map((m) =>
             m.role === "me" ? (
               <div key={m.id} className="pq-pop flex justify-end">
                 <p
-                  className="bubble max-w-[75%] whitespace-pre-wrap px-3 py-2 text-sm font-semibold"
+                  className="bubble max-w-[68%] whitespace-pre-wrap px-2.5 py-1.5 text-[13px] font-semibold"
                   style={{ background: "var(--ink)", color: "var(--paper)" }}
                 >
                   {m.text}
@@ -338,8 +338,8 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
                 <div
                   className={
                     m.kind === "artifact" || m.kind === "briefing"
-                      ? "min-w-0 max-w-[94%] flex-1"
-                      : "min-w-0 max-w-[75%]"
+                      ? "min-w-0 max-w-[820px] flex-1"
+                      : "min-w-0 max-w-[68%]"
                   }
                 >
                   {m.kind === "briefing" && (
@@ -348,7 +348,7 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
                         mission briefing · {quest.subject ?? quest.id.toUpperCase()}
                       </p>
                       <p className="mt-1 text-sm font-semibold opacity-70">{quest.tagline}</p>
-                      <p className="mt-2 whitespace-pre-line rounded-[10px] border-2 border-dashed border-[var(--ink)] bg-[var(--paper)] p-2.5 text-[15px] font-semibold">
+                      <p className="mt-1.5 whitespace-pre-line rounded-[10px] border-2 border-dashed border-[var(--ink)] bg-[var(--paper)] p-2 text-[13px] font-semibold">
                         🎯 {m.text}
                       </p>
                     </div>
@@ -356,7 +356,7 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
 
                   {m.kind === "text" && (
                     <p
-                      className="bubble px-3 py-2 text-sm font-extrabold"
+                      className="bubble px-2.5 py-1.5 text-[13px] font-extrabold"
                       style={{
                         background:
                           m.tone === "hype" ? "var(--accent)" : "var(--card)",
@@ -400,20 +400,20 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
                           </span>
                         )}
                       </div>
-                      <p className="mt-2 text-[15px] font-extrabold leading-snug">
+                      <p className="mt-1.5 text-[13px] font-extrabold leading-snug">
                         {m.verdict.tier === "farmer"
                           ? `W prompt. ${m.verdict.advice}`
                           : m.verdict.advice}
                       </p>
                       {m.verdict.tier !== "farmer" && !!m.verdict.missing?.length && (
-                        <div className="mt-2.5 flex flex-wrap items-center gap-1.5">
+                        <div className="mt-2 flex flex-wrap items-center gap-1">
                           <span className="text-[10px] font-extrabold uppercase tracking-widest opacity-55">
                             missing
                           </span>
                           {m.verdict.missing.map((mm) => (
                             <span
                               key={mm}
-                              className="rounded-full border-2 border-[var(--ink)] bg-[var(--pop)] px-2 py-px text-[11px] font-extrabold text-white"
+                              className="rounded-full border-2 border-[var(--ink)] bg-[var(--pop)] px-1.5 py-px text-[10px] font-extrabold text-white"
                             >
                               {label(mm)}
                             </span>
@@ -431,7 +431,7 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
             <div className="pq-pop flex items-start gap-2">
               <AgentAvatar mood="thinking" size="sm" className="mt-0.5 shrink-0 !h-8 !w-8" />
               <div
-                className="bubble max-w-[75%] px-3 py-2 font-mono text-[12.5px] leading-relaxed"
+                className="bubble max-w-[68%] px-2.5 py-1.5 font-mono text-[11.5px] leading-relaxed"
                 style={{ background: "var(--ink)", color: "var(--paper)" }}
               >
                 {THINK_LINES.slice(0, thinkStep + 1).map((l, i) => (
@@ -452,7 +452,7 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
         </div>
 
         {/* composer */}
-        <div className="border-t-[2.5px] border-[var(--ink)] bg-[var(--card)] px-3 py-2.5 sm:px-4">
+        <div className="border-t-[2.5px] border-[var(--ink)] bg-[var(--card)] px-3 py-2 sm:px-5">
           {err && <p className="mb-1.5 text-sm font-bold text-[var(--pop)]">{err}</p>}
           <div className="flex items-end gap-2">
             <textarea
@@ -466,18 +466,18 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
                   ? "aura locked in — this quest is done"
                   : "Tell the agent who it is, what you need, and how the answer should look. Enter to send, Shift+Enter for a new line."
               }
-              className="max-h-40 min-h-[46px] flex-1 resize-none rounded-[12px] border-2 border-[var(--ink)] bg-[var(--paper)] p-2.5 font-mono text-sm leading-relaxed outline-none focus:bg-white disabled:opacity-50"
+              className="max-h-32 min-h-[40px] flex-1 resize-none rounded-[10px] border-2 border-[var(--ink)] bg-[var(--paper)] p-2 font-mono text-[12.5px] leading-relaxed outline-none focus:bg-white disabled:opacity-50"
             />
             <button
               onClick={onSend}
               disabled={!draft.trim() || busy || locked}
               aria-label="send prompt"
-              className="btn-loud card-sticker-press shrink-0 px-4 py-2.5 text-sm"
+              className="btn-loud card-sticker-press shrink-0 px-3.5 py-2 text-[13px]"
             >
               {thinking ? "…" : "▶"}
             </button>
           </div>
-          <p className="mt-1 text-[11px] font-semibold opacity-50">
+          <p className="mt-1 text-[10px] font-semibold opacity-50">
             {locked
               ? "aura locked in — head back to the quest map"
               : runs === 0

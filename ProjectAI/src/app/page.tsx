@@ -204,7 +204,7 @@ export default function Landing() {
             </button>
 
             <p className="mt-3 text-[11px] font-medium opacity-55">
-              Demo build. Your work stays on this laptop.
+              Demo build. Your progress is saved securely for this session.
             </p>
           </form>
 

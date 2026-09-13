@@ -148,7 +148,7 @@ body {
 
 /* ---- chat player (prompting quests) ---- */
 .chat-shell {
-  height: calc(100dvh - 9.5rem);
+  height: calc(100dvh - 8rem);
   min-height: 420px;
 }
 @media (max-width: 640px) {

@@ -14,19 +14,20 @@ export default function SlidesDeck({ artifact }: { artifact: SlidesArtifact }) {
       <p className="text-[10px] font-extrabold uppercase tracking-[0.22em] opacity-55">
         deck · {total} slide{total === 1 ? "" : "s"}
       </p>
-      <p className="mt-0.5 text-sm font-black leading-tight">{artifact.title}</p>
+      <p className="mt-0.5 text-[13px] font-black leading-tight">{artifact.title}</p>
 
       {/* 16:9 stage */}
       <div
         className="relative mt-2 w-full overflow-hidden rounded-[10px] border-2 border-[var(--ink)] bg-[var(--paper)]"
-        style={{ aspectRatio: "16 / 9" }}
+        // Cap the stage so a wide chat window doesn't turn 16:9 into a full-screen slide.
+        style={{ aspectRatio: "16 / 9", maxWidth: "min(100%, 480px)", maxHeight: "27vh" }}
       >
-        <div className="absolute inset-0 flex flex-col gap-2 overflow-y-auto p-3 sm:p-4">
-          <h4 className="text-[15px] font-black leading-tight sm:text-lg">{slide.heading}</h4>
+        <div className="absolute inset-0 flex flex-col gap-1.5 overflow-y-auto p-2.5 sm:p-3">
+          <h4 className="text-[13px] font-black leading-tight sm:text-[15px]">{slide.heading}</h4>
           {!!slide.bullets.length && (
             <ul className="space-y-1">
               {slide.bullets.map((b, k) => (
-                <li key={k} className="flex gap-1.5 text-[12px] font-semibold leading-snug sm:text-[13px]">
+                <li key={k} className="flex gap-1.5 text-[11px] font-semibold leading-snug sm:text-[12px]">
                   <span className="shrink-0 font-black" style={{ color: "var(--accent-ink)" }}>
                     ▪
                   </span>
