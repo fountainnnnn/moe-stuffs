@@ -82,7 +82,7 @@ export const EXTENDED_QUESTS: Quest[] = [
         prompt: "A calculator follows fixed instructions to add two numbers. What best describes it?",
         options: ["Rule-based software", "Machine learning", "Generative AI", "AI agent"],
         answerIndex: 0,
-        hint: "Ask whether the program had to learn a pattern from examples.",
+        hint: "Did it learn a pattern from examples, or follow steps written in advance?",
         explanation: "Rule-based software. Its steps were written directly by people. It does not learn from data or generate new content.",
       },
       {
