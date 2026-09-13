@@ -1,4 +1,5 @@
 import { notFound } from "next/navigation";
+import Link from "next/link";
 import { QUESTS } from "@/lib/quests";
 import PromptingQuest from "@/components/quest/PromptingQuest";
 import KnowledgeQuest from "@/components/quest/KnowledgeQuest";
@@ -21,9 +22,9 @@ export default async function QuestPlayerPage({
         <p className="mt-2 text-sm font-semibold opacity-70">
           Not open yet. Farm some aura on the live quests first.
         </p>
-        <a href="/quests" className="btn-loud card-sticker-press mt-6 inline-block">
+        <Link href="/quests" className="btn-loud card-sticker-press mt-6 inline-block">
           ← quest map
-        </a>
+        </Link>
       </main>
     );
   }
