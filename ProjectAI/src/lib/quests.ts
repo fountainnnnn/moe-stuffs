@@ -27,7 +27,7 @@ export const QUESTS: Quest[] = [
   // ---------------- PROMPTING TRACK ----------------
   {
     id: "p1",
-    subject: "Prompting: CRAFT",
+    subject: "Writing Prompts",
     category: "prompting",
     title: "The 90-Second Pitch",
     tagline: "300 bored Sec 1s, one deck. Make them sign up.",
@@ -131,7 +131,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "p2",
-    subject: "Secure App Specs",
+    subject: "Specifying Apps",
     category: "prompting",
     title: "Ship the Party Site",
     tagline: "\"Build me a website\" gets you a broken website. Spec it.",
@@ -217,7 +217,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "p3",
-    subject: "Planning AI Agents",
+    subject: "Planning Agents",
     category: "prompting",
     title: "IG Autopilot",
     tagline: "One week. Zero hands. Write the plan the agent follows.",
@@ -314,7 +314,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "p4",
-    subject: "Hallucinations",
+    subject: "Fact-Checking AI",
     category: "prompting",
     title: "Don't Get Played",
     tagline: "The agent will lie to your face. Catch it.",
@@ -409,7 +409,7 @@ export const QUESTS: Quest[] = [
   // ---------------- KNOWLEDGE TRACK ----------------
   {
     id: "k1",
-    subject: "Deepfakes",
+    subject: "Spotting Deepfakes",
     category: "knowledge",
     title: "Real or Fake?",
     tagline: "Six scenes. Some look cooked. Find the clues.",
@@ -537,7 +537,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "k3",
-    subject: "Hallucinations",
+    subject: "Spotting Hallucinations",
     category: "knowledge",
     title: "Cap Detector",
     tagline: "One sentence in each answer is straight-up made up. Find it.",
