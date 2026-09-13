@@ -27,7 +27,7 @@ export const QUESTS: Quest[] = [
   // ---------------- PROMPTING TRACK ----------------
   {
     id: "p1",
-    subject: "Writing Prompts",
+    subject: "AI is only as good as the context you give it",
     category: "prompting",
     title: "The 90-Second Pitch",
     tagline: "300 bored Sec 1s, one deck. Make them sign up.",
@@ -131,7 +131,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "p2",
-    subject: "Specifying Apps",
+    subject: "Say what to build before it builds it",
     category: "prompting",
     title: "Ship the Party Site",
     tagline: "\"Build me a website\" gets you a broken website. Spec it.",
@@ -217,7 +217,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "p3",
-    subject: "Planning Agents",
+    subject: "An agent needs steps, not wishes",
     category: "prompting",
     title: "IG Autopilot",
     tagline: "One week. Zero hands. Write the plan the agent follows.",
@@ -314,7 +314,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "p4",
-    subject: "Fact-Checking AI",
+    subject: "Never trust a fact without a source",
     category: "prompting",
     title: "Don't Get Played",
     tagline: "The agent will lie to your face. Catch it.",
@@ -409,7 +409,7 @@ export const QUESTS: Quest[] = [
   // ---------------- KNOWLEDGE TRACK ----------------
   {
     id: "k1",
-    subject: "Spotting Deepfakes",
+    subject: "Your eyes can be fooled \u2014 learn the tells",
     category: "knowledge",
     title: "Real or Fake?",
     tagline: "Six scenes. Some look cooked. Find the clues.",
@@ -473,7 +473,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "k2",
-    subject: "AI Ethics",
+    subject: "Using AI isn't cheating; hiding it is",
     category: "knowledge",
     title: "Okay or Not Okay?",
     tagline: "Six scenarios. Some are fine. Some will get you called up.",
@@ -537,7 +537,7 @@ export const QUESTS: Quest[] = [
   },
   {
     id: "k3",
-    subject: "Spotting Hallucinations",
+    subject: "Confident doesn't mean correct",
     category: "knowledge",
     title: "Cap Detector",
     tagline: "One sentence in each answer is straight-up made up. Find it.",

@@ -111,12 +111,13 @@ function QuestCard({
       href={`/quests/${quest.id}`}
       className={`card-sticker card-sticker-press ${tilt} flex h-full flex-col p-4`}
     >
-      <div className="flex items-center justify-between">
-        <p className="text-[11px] font-extrabold uppercase tracking-[0.2em] opacity-55">
+      <div className="flex items-start justify-between gap-2">
+        {/* the lesson, not a category — wraps to two lines without squashing the badge */}
+        <p className="text-[11px] font-extrabold uppercase leading-snug tracking-[0.06em] opacity-55">
           {quest.subject ?? quest.id.toUpperCase()}
         </p>
         <span
-          className="rounded-full border-2 border-[var(--ink)] px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider"
+          className="shrink-0 whitespace-nowrap rounded-full border-2 border-[var(--ink)] px-2 py-0.5 text-[10px] font-extrabold uppercase tracking-wider"
           style={{ background: accent }}
         >
           {quest.category === "prompting" ? "LLM judged" : "quiz"}

@@ -36,16 +36,16 @@ Top 3 in the class hold the **Aura Farmer** title. First-try success earns a bon
 
 **Prompting Arena** (LLM-judged, real execution):
 
-| Subject | Quest | You produce |
+| What you learn | Quest | You produce |
 |---|---|---|
-| Writing Prompts | The 90-Second Pitch | A 5-slide CCA assembly pitch deck |
-| Specifying Apps | Ship the Party Site | A class-party sign-up website |
-| Planning Agents | IG Autopilot | A one-week agent plan for the class Instagram |
-| Fact-Checking AI | Don't Get Played | A research brief — and a trap |
+| AI is only as good as the context you give it | The 90-Second Pitch | A 5-slide CCA assembly pitch deck |
+| Say what to build before it builds it | Ship the Party Site | A class-party sign-up website |
+| An agent needs steps, not wishes | IG Autopilot | A one-week agent plan for the class Instagram |
+| Never trust a fact without a source | Don't Get Played | A research brief — and a trap |
 
 **Don't Get Played** is the one we're proudest of: unless the student's prompt demands verification and sources, the agent plants two false facts and a fabricated citation in an otherwise-plausible research brief. Submit without catching them and the screen takes over: **🚨 FLAGGED — you just shipped a hallucination**, with the fakes revealed. That lesson sticks.
 
-**Knowledge Grind** (quizzes): Spotting Deepfakes (real or fake?), AI Ethics (okay or not okay?), Spotting Hallucinations (spot the cap).
+**Knowledge Grind** (quizzes): *Your eyes can be fooled — learn the tells* (real or fake?), *Using AI isn't cheating; hiding it is* (okay or not okay?), *Confident doesn't mean correct* (spot the cap).
 
 ## The classroom layer
 

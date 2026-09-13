@@ -282,7 +282,7 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
           <AgentAvatar mood={mood} size="sm" className="shrink-0 !w-7 !h-7" />
           <div className="min-w-0">
             <h1 className="truncate text-sm font-black leading-tight sm:text-base">
-              <span className="opacity-50">{quest.subject ?? quest.id.toUpperCase()} ·</span> {quest.title}
+              <span className="opacity-50">{quest.id.toUpperCase()} ·</span> {quest.title}
             </h1>
             {!!quest.rubric?.length && (
               <div className="mt-0.5 flex flex-wrap items-center gap-1">
@@ -345,8 +345,13 @@ export default function PromptingQuest({ quest }: { quest: Quest }) {
                   {m.kind === "briefing" && (
                     <div className="bubble bg-[var(--card)] p-3">
                       <p className="text-[10px] font-extrabold uppercase tracking-[0.22em] opacity-55">
-                        mission briefing · {quest.subject ?? quest.id.toUpperCase()}
+                        mission briefing · {quest.id.toUpperCase()}
                       </p>
+                      {quest.subject && (
+                        <p className="mt-1 text-[13px] font-black leading-snug">
+                          💡 {quest.subject}
+                        </p>
+                      )}
                       <p className="mt-1 text-sm font-semibold opacity-70">{quest.tagline}</p>
                       <p className="mt-1.5 whitespace-pre-line rounded-[10px] border-2 border-dashed border-[var(--ink)] bg-[var(--paper)] p-2 text-[13px] font-semibold">
                         🎯 {m.text}
