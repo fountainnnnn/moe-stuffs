@@ -102,7 +102,7 @@ export default function QuestMapPage() {
                 Track {trackIndex + 1} · {quests.length} quests
               </span>
             </div>
-            <ul className="mt-5 grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
+            <ul className="-mx-3 -my-3 mt-2 grid gap-7 px-3 py-3 sm:grid-cols-2 lg:grid-cols-3">
               {quests.map((q, i) => (
                 <li key={q.id}>
                   <QuestCard quest={q} tilt={i % 2 === 0 ? "tilt-l" : "tilt-r"} accent={track.color} />

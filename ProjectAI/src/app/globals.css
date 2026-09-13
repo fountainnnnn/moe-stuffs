@@ -113,8 +113,13 @@ body {
   font-size: 0.75rem;
 }
 .quest-track {
-  content-visibility: auto;
-  contain-intrinsic-size: 520px;
+  /* Rotated cards and their hard shadows must be allowed to leave the grid cell. */
+  overflow: visible;
+}
+
+@media (max-width: 639px) {
+  .quest-track .tilt-l,
+  .quest-track .tilt-r { transform: none; }
 }
 
 /* ---- shell additions (Agent C) ---- */
